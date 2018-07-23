@@ -1,0 +1,37 @@
+<div class="item item-body" ng-init="prepareOrder()">
+  <div class="row time_picker">
+    <div class="item item-input item-time validated">
+      <ionic-timepicker input-obj="timePickerObject">
+        <i class="icon ion-android-time placeholder-icon ion-android-time-color">
+          <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+        </i>
+        <span class="positive">{{ 'SELECT_TIME' | translate }}
+        </span>
+        <span>
+          {{ timeOrder | amDateFormat:'HH:mm' }}</span>
+      </ionic-timepicker>
+      <i class="icon ion-alert-circled error"></i>
+    </div>
+  </div>
+  <div></div>
+
+  <div class="row shop_notes">
+    <div class="col col-20">{{ 'SEND_DELIVERY' | translate }}  - </div>
+    <div class="col col-10 no-padding"><input type="text" ng-model="$root.sendDelivery" placeholder="0"></div>
+    <div class="col col-20">ש"ח</div>
+    <div class="col col-20">, {{ 'SEND_PRICE' | translate }}  - </div>
+    <div class="col col-10 no-padding"><input type="text" ng-model="$root.sendPrice" placeholder="0"></div>
+    <div class="col col-20">ש"ח</div>
+  </div>
+
+  <div class="row shop_notes">
+    <label class="item-input-wrapper energized-border">
+      <i class="icon mk-icon-pencil placeholder-icon"></i>
+      <textarea name="note" id="" class="padding" cols="30" rows="3" ng-model="$root.shopNote" placeholder="{{ 'NOTES' | translate }}" keyboard></textarea>
+    </label>
+  </div>
+
+  <p>
+    <button class="button button-block button-energized" ng-click="sendOffer()">{{ 'SEND_OFFER' | translate }}</button>
+  </p>
+</div>

@@ -1,0 +1,87 @@
+<ion-nav-view class="rtl">
+  <ion-view view-title="{{ 'PERSONAL_INFO' | translate }}">
+  	<div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+          <param name="src" value="img/logo_small.svg">
+      </object>
+      <button class="button button-clear icon-right ion-chevron-right button-light ion-ios-help-outline" ui-sref="feedback"></button>
+      <h1 class="title"> {{ 'PERSONAL_INFO' | translate }}</h1>
+    </div>
+     <ion-content class="has-header padding-top" ng-class="$root.devicePlatform=='ios'?'has-header ios':'android'">
+      <div class="settings" ng-init="shopCurrent()">
+        <form name="ShopUpdate">
+          <div class="list">
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="0" placeholder="{{ 'F_NAME' | translate }}" ng-model="shop.first_name" name="firstName" ng-init="firstName=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="1" placeholder="{{ 'L_NAME' | translate }}" ng-model="shop.last_name" name="lastName" ng-init="lastName=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="2"  name="shopName" ng-model="shop.company_name" placeholder="{{ 'SHOP_NAME' | translate }}" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                    <input type="text" validator="required" tabindex="4" placeholder="{{ 'CITY' | translate }}" ng-model="shop.city" name="city" ng-init="city=''" valid-method="submit-only" keyboard>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                    <input type="text" validator="required" tabindex="5" placeholder="{{ 'STREET' | translate }}" ng-model="shop.street" name="street" ng-init="street=''" valid-method="submit-only" keyboard>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+              <div class="col col-33">
+                <label class="item item-input">
+                    <input type="text" validator="required" tabindex="6" placeholder="{{ 'BUILDING' | translate }}" ng-model="shop.building" name="building" valid-method="submit-only" keyboard>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                    <input type="tel" validator="required" tabindex="8" placeholder="{{ 'MOBILE_PHONE' | translate }}" ng-model="shop.phone" name="phone" ui-br-phone-number valid-method="submit-only" keyboard>
+                    <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div>
+              <ion-col>
+                  <ion-toggle ng-model="pushEnable" toggle-class="toggle-calm" ng-change="pushStatus()" ><b>{{ 'PUSH_NOTIFICATIONS' | translate }}</b></ion-toggle>
+              </ion-col>
+            </div>
+            <div class="padding">
+               <button class="button button-block button-calm" validation-submit="ShopUpdate" ng-click="shopUpdate()">
+                {{ 'UPDATE' | translate }}
+              </button>
+              <button ui-sref="shopFinance" class="button button-block button-balanced">
+                {{ 'PROFILE_CARD' | translate }}
+              </button>
+              <button ng-click="reset()" class="button button-block button-dark">
+               {{ 'LOGOUT' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

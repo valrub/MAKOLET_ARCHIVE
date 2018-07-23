@@ -1,0 +1,67 @@
+<div class="item item-body">
+  <div class="order_status">
+    <div class="row row-center">
+      <div class="col col-70">
+        <h5 class="positive">{{ 'ORDER_STATUS' | translate }}:</h5>
+      </div>
+    </div>
+    <div class="row row-center">
+      <div class="col col-40">
+        {{ 'THE_LIST_WAS_SENT' | translate }}
+      </div>
+      <div class="col col-30">
+        {{ order.created_at | amDateFormat:'HH:mm' }}
+      </div>
+    </div>
+    <div class="row row-center">
+      <div class="col col-40">
+        {{ 'SENT_REPLY_TO_CUSTOMER' | translate }}
+      </div>
+      <div class="col col-30">
+        {{ order.proposal.proposed_at | amDateFormat:'HH:mm' }}
+      </div>
+    </div>
+    <div class="row row-center">
+      <div class="col col-40">
+        {{ 'PROPOSAL_SUCCESS' | translate }}
+      </div>
+      <div class="col col-30">
+        {{ order.proposal.delivery_time | amDateFormat:'HH:mm' }}
+      </div>
+    </div>
+    <div class="row padding-bottom">
+      <div class="col">
+        <div class="delivery-time">{{ 'DELIVERY' | translate }}
+          {{  order.proposal.delivery_time | amDateFormat:'DD.MM HH:mm' }}</div>
+      </div>
+    </div>
+    <div class="order-circle in-process">
+      <div>
+        <div>
+          <span>{{ 'PROPOSAL_SUCCESS' | translate }}</span>
+          <i class="icon mk-icon-logo"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">{{ 'ENTER_SUM' | translate }}</div>
+  </div>
+  <div class="row shop_notes">
+    <label class="item item-input">
+      <input type="number" name="price" ng-model="price" placeholder="{{ 'ENTER_SUM' | translate }}" keyboard>
+    </label>
+  </div>
+  <div class="row">
+    <div class="col">
+      {{ 'DELIVERY_PRICE' | translate }}</div>
+  </div>
+  <div class="row shop_notes">
+    <label class="item item-input">
+      <input type="number" name="price" ng-model="delivery_price" placeholder="{{ 'DELIVERY_PRICE' | translate }}" keyboard>
+    </label>
+  </div>
+  <p>
+    <button class="button button-energized button-block" ng-click="closeOffer(order.id, price, delivery_price)">{{ 'AN_ORDER' | translate }}</button>
+  </p>
+</div>

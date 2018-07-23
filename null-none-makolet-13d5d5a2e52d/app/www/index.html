@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="makoletApp" lang="he_IL">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Makolet</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic-timepicker/src/ionic-timepicker.styles.css" rel="stylesheet">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-translate/angular-translate.js"></script>
+    <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="lib/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+    <script src="lib/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="lib/lodash/dist/lodash.min.js"></script>
+    <script src="lib/ngstorage/ngStorage.js"></script>
+    <script src="lib/ionic-rating/ionic-rating.min.js"></script>
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
+    <script src="lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+    <script src="lib/angular-timeago/src/timeAgo.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angular-moment/angular-moment.js"></script>
+    <script src="lib/angular-validation/dist/angular-validation.js"></script>
+    <script src="lib/angular-validation/dist/angular-validation-rule.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/App.js"></script>
+    <script src="js/modules/apiService.js"></script>
+    <script src="js/modules/autocomplete.js"></script>
+    <script src="js/modules/products.js"></script>
+    <script src="js/controller/abstractCtrl.js"></script>
+    <script src="js/controller/accountCtrl.js"></script>
+    <script src="js/controller/shopCtrl.js"></script>
+    <script src="js/controller/orderCtrl.js"></script>
+  </head>
+
+  <body>
+    <ion-nav-view cache-view="false">
+    </ion-nav-view>
+    <div ng-controller="tabsCtrl" ng-show="$root.client">
+        <div ng-include="" src="&apos;templates/tabs/&apos;+$root.client+&apos;.html&apos;"></div>
+    </div>
+   <script src="http://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyAS4E1-4Oi0hIIB2EFZQp7TgJ0F9q9Hcis"></script>
+  </body>
+</html>

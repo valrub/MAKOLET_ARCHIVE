@@ -1,0 +1,70 @@
+<ion-nav-view class="rtl">
+  <ion-view view-title="{{ 'PURCHASES' | translate }}" id="user_archive">
+  	<div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+          <param name="src" value="img/logo_small.svg">
+      </object>
+      <button class="button button-clear icon-right ion-chevron-right ion-refresh" ng-click="shopSummary()"></button>
+      <h1 class="title">{{ $root.name }}</h1>
+    </div>
+    <ion-content class="has-header padding" ng-class="$root.devicePlatform=='ios'?'has-header ios':'has-tabs-top android'" ng-init="shopSummary(); currentStatus=''">
+      <ion-refresher pulling-text="{{ 'UPDATE' | translate }}" on-refresh="shopSummary()">
+      </ion-refresher>
+      <div class="padding">
+        <div class="button-bar bar-positive bar-outline">
+          <a class="button" ng-click="currentStatus = ''">{{ 'ALL' | translate }}</a>
+          <a class="button" ng-click="currentStatus = 6">{{ 'PAID' | translate }}</a>
+          <a class="button" ng-click="currentStatus = 5">{{ 'NOT_PAID' | translate }}</a>
+        </div>
+      </div>
+      <ion-list ng-if="orders.data.length == 0">
+        <ion-item striped class="no-padding">
+          <div class="padding">{{ 'EMPTY' | translate }}</div>
+        </ion-item>
+      </ion-list>
+      <div ng-repeat="(key, value) in orders.data">
+        <div class="row">
+          <div class="col"><strong> {{ key }}</strong></div>
+          <div class="col col-50"><strong>{{ 'TOTAL' | translate }} {{value.total_price}} ₪</strong> </div>
+        </div>
+        <ion-list ng-show="!value.orders.length">
+          <ion-item striped class="no-padding">
+            <div class="padding">{{ 'EMPTY' | translate }}</div>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+           <ion-item class="no-padding item-shop-orders" ng-repeat="item in value.orders | filter:{'status': currentStatus }">
+              <a ui-sref="shopOrder({id: item.id})" class="row row-center button button-small button-clear button-calm item-body">
+                <div class="col col-10 text-right nowrap">{{ item.id }}</div>
+                <div class="col col-10 text-right nowrap">
+                  {{ item.created_at | amDateFormat:'DD.MM' }}
+                </div>
+                <div class="col col-33 text-right">
+                  {{ item.first_name }} {{ item.last_name }}
+                </div>
+                <div class="col col-20 text-right nowrap">
+                  ₪ {{(item.price-0)+(item.delivery_price-0) | number : 2}}
+                </div>
+                <div class="col col-20 text-right">
+                  {{ item.status | statusOrderUser }}
+                </div>
+                <div class="col text-left nowrap"><i class="icon ion-ios-arrow-left"></i></div>
+              </a>
+           </ion-item>
+        </ion-list>
+      </div>
+      <div class="row padding-botttom">
+        <div class="col-50 text-right paginate">
+          <i class="icon ion-ios-arrow-right" ng-show="orders.prev_page_url"></i>
+          <a href="#" class="row-none-decoration" ng-click="shopSummaryPaginate(orders.current_page - 1)" ng-show="orders.prev_page_url"> {{ 'PREVIOUS_ORDERS' | translate }}</a>
+        </div>
+        <div class="col-50 text-left paginate">
+          <a href="#" class="row-none-decoration" ng-click="shopSummaryPaginate(orders.current_page + 1)" ng-show="orders.next_page_url" ng-show="orders.prev_page_url">{{ 'NEXT_ORDERS' | translate }}</a>
+          <i class="icon ion-ios-arrow-left" ng-show="orders.next_page_url"></i>
+        </div>
+      </div>
+      <div class="padding-last">
+      </div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

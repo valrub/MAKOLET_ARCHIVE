@@ -1,0 +1,59 @@
+<ion-nav-view class="rtl">
+   <ion-view view-title="{{ 'PROFILE_CARD' | translate }}" id="customer_payment_info">
+      <div class="bar bar-header bar-calm">
+         <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+            <param name="src" value="img/logo_small.svg">
+         </object>
+        <button class="button button-clear icon-right ion-chevron-right button-light" ng-click="$ionicGoBack()">{{ 'BACK' | translate }}</button>
+         <h1 class="title">{{ 'BANK_ACCOUNT' | translate }}</h1>
+      </div>
+      <ion-content ng-class="$root.devicePlatform=='ios'?'has-header ios':'has-tabs-top android'">
+         <div class="sign-up-block" ng-init="customerCurrent()">
+            <form name="CustomerUpdateFinance">
+               <div class="padding">
+                  <div class="list">
+                     <label class="item item-input item-select">
+                       <div class="input-label">
+                           {{ 'ACCOUNT_NUMBER' | translate }}
+                       </div>
+                       <select>
+                           <option value="visa" selected>Visa / Master Card</option>
+                       </select>
+                     </label>
+                     <label class="item item-input">
+                        <input type="text" name="credit_card_number" validator="required" ng-model="user.credit_card_number" placeholder="{{ 'TICKET_NUMBER' | translate }}" valid-method="submit-only" keyboard>
+                     </label>
+                     <div class="row no-padding">
+                        <div class="col col-25">
+                           <div class="input-label">
+                             {{ 'VALIDITY' | translate }}
+                           </div>
+                        </div>
+                        <div class="col col-35 item item-input item-select">
+                           <select name="valid_until_year" ng-model="user.valid_until_year">
+                              <option value="{{ year }}" ng-repeat="year in [2016, 2017, 2018, 2019, 2020, 2021, 2022]" ng-selected="user.valid_until_year == year" >{{ year }}</option>
+                           </select>
+                        </div>
+                        <div class="col col-35 item item-input item-select">
+                           <select name="valid_until_month" ng-model="user.valid_until_month">
+                            <option value="{{ month }}" ng-repeat="month in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" ng-selected="user.valid_until_month == month">{{ month }}</option>
+                           </select>
+                        </div>
+                     </div>
+                     <label class="item item-input">
+                        <input type="text" name="security_code" validator="required"  ng-model="user.security_code" placeholder="{{ 'SECURITY_CODE' | translate }}" valid-method="submit-only" keyboard>
+                        <span class="placeholder-icon no-padding"><i class="ion-help-circled"></i></span>
+                     </label>
+                     <button class="button button-block button-balanced" validation-submit="CustomerUpdateFinance" ng-click="customerUpdateFinance()">
+                       {{ 'UPDATE' | translate }}
+                     </button>
+                     <button ng-click="reset()" class="button button-block button-dark">
+                       {{ 'LOGOUT' | translate }}
+                     </button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </ion-content>
+   </ion-view>
+</ion-nav-view>

@@ -1,0 +1,41 @@
+<ion-nav-view class="rtl">
+  <ion-view view-title="{{ shop.company_name }}" class="shop">
+  	<div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+          <param name="src" value="img/logo_small.svg">
+      </object>
+      <button class="button button-clear icon-right ion-chevron-right button-light" ng-click="$ionicGoBack()">{{ 'BACK' | translate }}</button>
+      <h1 class="title">{{ shop.company_name }}</h1>
+    </div>
+    <ion-content class="has-header" ng-class="$root.devicePlatform=='ios'?'has-header has-footer ios':'has-tabs-top android'" ng-init="shop()">
+      <div class="row shop_info">
+        <div class="col">
+          <div class="padding">
+            <h4 class="heading">{{ shop.city }} {{ shop.street }} {{ shop.building }}</h4>
+            <div class="shop_reviews">
+              <rating ng-model="shop.rating" max="5"></rating>
+            </div>
+            <p>{{ shop.phone }}</p>
+            <p>{{ shop.mobile }}</p>
+          </div>
+        </div>
+        <div class="col col-50">
+          <div class="padding small-map">
+            <ui-gmap-google-map center='$root.map.center' zoom='$root.map.zoom' control="$root.map.control" options="$root.map.options">
+              <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'"></ui-gmap-markers>
+            </ui-gmap-google-map>
+          </div>
+        </div>
+      </div>
+      <div class="list shop_reviews">
+        <div class="item item-body" ng-repeat="feedback in shop.feedbacks">
+          <h5 class="heading" ng-bind="feedback.created_at | amDateFormat:'DD.MM.YYYY'"></h5>
+          <rating ng-model="feedback.score" max="5"></rating>
+          <p>
+            {{feedback.comment}}
+          </p>
+        </div>
+      </div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

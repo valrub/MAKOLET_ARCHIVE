@@ -1,0 +1,40 @@
+	<div ng-repeat="item in order.proposals | filter:{ status: 3 }">
+      	<div class="row row-center">
+	         <div class="col">
+	            <h5 class="positive">{{ 'ORDER_STATUS' | translate }}:</h5>
+	         </div>
+      	</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'THE_LIST_WAS_SENT' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ order.created_at | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'INVITATION_ACCEPTED' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ item.proposed_at | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'THE_PROPOSAL_WAS_APPROVED' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ item.accepted_at | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+	</div>
+	<div class="order-circle">
+	  <div>
+	     <div>
+	       <span>{{ 'PENDING_FINAL_APPROVAL' | translate }}</span>
+	       <i class="icon mk-icon-logo"></i>
+	     </div>
+	  </div>
+	</div>
+	<div class="delivery-time">{{ 'DELIVERY' | translate }} {{ item.delivery_time | amDateFormat:'DD.MM HH:mm' }}</div>

@@ -1,0 +1,48 @@
+<ion-nav-view id="shop-info" class="rtl">
+  <ion-view view-title="{{ 'SHOP_ACCOUNT' | translate }}">
+  	<div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+          <param name="src" value="img/logo_small.svg">
+      </object>
+      <button class="button button-clear icon-right ion-chevron-right button-light" ng-click="$ionicGoBack()">{{ 'BACK' | translate }}</button>
+      <h1 class="title">{{ 'SHOP_ACCOUNT' | translate }}</h1>
+    </div>
+     <ion-content ng-class="$root.devicePlatform=='ios'?'has-header has-footer ios':'has-tabs-top android'">
+      <div class="sign-up-block" ng-init="shopCurrent()">
+        <form name="ShopFinanceUpdate">
+          <div class="list">
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="0" placeholder="{{ 'ACCOUNT_NUMBER' | translate }}" name="bank_account_number" ng-model="shop.bank_account_number" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="1" placeholder="{{ 'BANK_NAME' | translate }}" name="bank_name" ng-model="shop.bank_name" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="2" placeholder="{{ 'BANK_DEPARTMENT' | translate }}" name="bank_branch" ng-model="shop.bank_branch" valid-method="submit-only" keyboard>
+                </label>
+              </div>
+            </div>
+            <div class="padding">
+               <button class="button button-block button-calm" validation-submit="ShopFinanceUpdate" ng-click="shopUpdate()">
+                {{ 'UPDATE' | translate }}
+              </button>
+              <button ng-click="reset()" class="button button-block button-dark">
+               {{ 'LOGOUT' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

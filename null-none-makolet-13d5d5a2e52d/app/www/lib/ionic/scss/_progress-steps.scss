@@ -1,0 +1,148 @@
+/* Copyright 2013-2015 etc Chris Tabor. See https://github.com/christabor/css-progress-wizard/blob/master/LICENSE for details. */
+
+// colors
+
+$incomplete: #fff !default;
+$complete: $energized !default;
+$active: #337AB7 !default;
+$hover: #5671d0 !default;
+$step-danger: #d3140f !default;
+$step-warning: #edb10a !default;
+$step-info: #5b32d6 !default;
+
+// sizing
+
+$bubble-size: 20px !default;
+$bubble-line-thickness: 3px !default;
+$border-thickness: 1px !default;
+$darken-amount: 30% !default;
+
+// misc
+$mobile-size: 400px !default;
+
+@mixin bubble-style($color) {
+    background-color: $color;
+    color: $color;
+    border-color: darken($color, $darken-amount);
+    &:before,
+    &:after {
+        background-color: $color;
+        border-color: darken($color, $darken-amount);
+    }
+}
+.flexer {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+.no-flexer {
+    display: block;
+}
+.no-flexer-element {
+    -ms-flex: 0;
+    -webkit-flex: 0;
+    -moz-flex: 0;
+    flex: 0;
+}
+.flexer-element {
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    flex: 1;
+}
+.progress-indicator {
+    @extend .flexer;
+    padding: 0;
+    font-size: 80%;
+    text-transform: uppercase;
+    margin:1em;
+    > li {
+        @extend .flexer-element;
+        list-style: none;
+        text-align: center;
+        width: auto;
+        padding: 0;
+        margin: 0 -0.5px;
+        position: relative;
+        text-overflow: ellipsis;
+        color: $positive;
+        border-right:1px solid $positive;
+        display: block;
+        &:hover {
+            color: darken($incomplete, $darken-amount);
+        }
+    }
+    > li .bubble {
+        /*border-radius: 1000px;*/
+        /*width: $bubble-size;*/
+        /*height: $bubble-size;*/
+        background-color: $incomplete;
+        display: block;
+        margin: 0.5em auto 0 auto;
+        /*border-bottom: $border-thickness solid darken($incomplete, 20%);*/
+    }
+    > li:first-child {
+            border:none;
+            .bubble {
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+        }
+    > li:last-child {
+        .bubble {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+    }
+
+    // line connectors
+
+    > li .bubble:before,
+    > li .bubble:after {
+        display: block;
+        position: absolute;
+        top: $bubble-size / 2 - $border-thickness;
+        width: 100%;
+        height: $bubble-line-thickness;
+        content: '';
+        background-color: $incomplete;
+    }
+    > li .bubble:before {
+        left: 0;
+    }
+    > li .bubble:after {
+        right: 0;
+    }
+
+    // completed state
+
+    > li.completed {
+        color:$positive;
+        .bubble {
+            background: $energized !important;
+            color: $energized;
+            border: 1px solid #FFFFFF;
+        }
+    }
+
+    // current state
+
+    > li.active {
+        color: $active;
+        .bubble {
+            @include bubble-style($active);
+        }
+    }
+
+
+
+
+}
+
+@media handheld, screen and (max-width: $mobile-size) {
+    .progress-indicator {
+        font-size: 60%;
+    }
+}

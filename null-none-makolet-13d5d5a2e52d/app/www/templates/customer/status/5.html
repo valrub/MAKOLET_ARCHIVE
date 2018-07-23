@@ -1,0 +1,52 @@
+	<div ng-repeat="item in order.proposals | filter:{ status: 5 }">
+      	<div class="row row-center">
+	         <div class="col">
+	            <h5 class="positive">{{ 'ORDER_STATUS' | translate }}:</h5>
+	         </div>
+      	</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'THE_LIST_WAS_SENT' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ order.created_at | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'INVITATION_ACCEPTED' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ item.proposed_at | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'THE_PROPOSAL_WAS_APPROVED' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ item.accepted_at | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+		<div class="row row-center">
+			<div class="col col-40">
+				{{ 'PROPOSAL_SUCCESS' | translate }}
+			</div>
+			<div class="col col-30">
+				{{ item.delivery_time | amDateFormat:'DD.MM HH:mm' }}
+			</div>
+		</div>
+		<div class="row row-center">
+			<div class="col price">{{ 'TOTAL_PRICE' | translate }}: {{ item.price }} ₪</div>
+			<div class="col price">{{ 'DELIVERY_PRICE' | translate }}: {{ item.delivery_price }} ₪</div>
+		</div>
+	</div>
+	<div class="order-circle success">
+	  <div>
+	     <div>
+	       <span>{{ 'PROPOSAL_SUCCESS' | translate }}</span>
+	       <i class="icon mk-icon-logo"></i>
+	     </div>
+	  </div>
+	</div>
+	<div class="delivery-time">{{ 'DELIVERY' | translate }} {{ item.delivery_time | amDateFormat:'DD.MM HH:mm' }}</div>

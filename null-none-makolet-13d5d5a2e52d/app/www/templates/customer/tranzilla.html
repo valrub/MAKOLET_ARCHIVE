@@ -1,0 +1,17 @@
+<ion-nav-view class="rtl">
+   <ion-view view-title="{{ 'BANK_ACCOUNT' | translate }}" id="customer_payment_info">
+      <div class="bar bar-header bar-calm">
+         <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+            <param name="src" value="img/logo_small.svg">
+         </object>
+        <button class="button button-clear icon-right ion-chevron-right button-light" ng-click="$ionicGoBack()">{{ 'BACK' | translate }}</button>
+         <h1 class="title">{{ 'BANK_ACCOUNT' | translate }}</h1>
+      </div>
+      <ion-content ng-class="$root.devicePlatform=='ios'?'has-header ios':'has-tabs-top android'"  overflow-scroll="true">
+        <h4 class="text-center padding">{{ 'TRANZILLA_TEXT' | translate }}</h4>
+        <div class="padding">
+          <iframe id="iframe" width="100%" height="100%" scrolling="no" frameborder="0" ng-src="{{ $root.userInfo.id | tranzila }}" ng-style="{'position': 'absolute', 'border': 'none'}"></iframe>
+        </div>
+      </ion-content>
+   </ion-view>
+</ion-nav-view>

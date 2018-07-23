@@ -1,0 +1,10 @@
+{
+  "name": "makolet",
+  "app_id": "3fd65ed5",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://makolet.biz/api"
+    }
+  ]
+}

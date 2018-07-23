@@ -1,0 +1,47 @@
+<ion-nav-view class="rtl">
+  <ion-view view-title="{{ 'LOGIN' | translate }}">
+    <ion-content class="padding m-screen m-login" style="background:url('img/login_bg.png') 50% 50% / cover; background-attachment: fixed;">
+      <div class="row">
+        <div class="col col-80 col-offset-10" ng-controller="accountCtrl" ng-init="init();">
+            <object id="E" type="image/svg+xml" data="img/logo_med.svg">
+                <param name="src" value="img/logo_med.svg">
+            </object>
+            <form name="Login">
+              <div class="list list-inset">
+                <label class="item item-input validated">
+                  <i class="icon ion-ios-email-outline placeholder-icon"></i>
+                  <input type="email" ng-model="email" validator="required, email" name="email" ng-init="email=''" placeholder="{{ 'EMAIL' | translate }}" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled"></i>
+                </label>
+                <label class="item item-input validated">
+                  <i class="icon ion-ios-locked-outline placeholder-icon"></i>
+                  <input type="password" ng-model="password" name="password" validator="required" ng-init="password=''" placeholder="{{ 'PASSWORD' | translate }}" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled"></i>
+                </label>
+              </div>
+              <button type="submit" class="button button-block button-positive" validation-submit="Login" ng-click="login()">
+                {{ 'LOGIN' | translate }}
+              </button>
+            </form>
+            <div class="content padding text-center text-uppercase">
+              <h5 class="register-and-join">{{ 'REGISTER_AND_JOIN_US' | translate }}</h5>
+            </div>
+            <a ui-sref="signUp" class="button mk-icon-basket button-block button-balanced">
+              {{ 'SIGN_UP_AS_BUYER' | translate }}
+            </a>
+            <button ng-click="newMarket()" class="button mk-icon-basket button-block button-energized">
+              {{ 'SIGN_UP_AS_MARKET' | translate }}
+            </button>
+            <form action="" id="marketReg" ng-show="isMarketRegister" class="list text-center list-inset ng-hide">
+              <label class="item item-input">
+                <input type="tel" placeholder="{{ 'PHONE_PLACEHOLDER' | translate }}" ui-br-phone-number ng-model="phoneMarket">
+              </label>
+              <small>{{ 'CONTACT_NUMBER' | translate }}:</small>
+              <div class="text-uppercase">050-7422797</div>
+            </form>
+            <div class="version">1.6</div>
+        </div>
+      </div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

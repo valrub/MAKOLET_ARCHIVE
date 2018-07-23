@@ -1,0 +1,69 @@
+<form name="StepSecond" id="step1" ng-init="$root.orderInfo = []; order(); customerCurrent();">
+  <div class="row" ng-show="!readonly">
+    <div class="col">
+      <button class="button button-block button-calm" add-products>{{ 'EDIT_PRODUCTS' | translate }}</button>
+    </div>
+  </div>
+  <div class="row" ng-show="!$root.orderInfo.length">
+    <div class="col">
+      <p>{{ 'LIST_EMPTY' | translate }}</p>
+    </div>
+  </div>
+  <div ng-show="$root.orderInfo.length">
+    <div class="col">
+      <ul class="list goods_list">
+        <li class="item row" ng-repeat="order in $root.orderInfo">
+          <div class="col">
+            <label class="item item-input validated">
+              {{ order.goods }}
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <label class="item item-input-wrapper">
+  	<i class="icon mk-icon-pencil placeholder-icon"></i>
+  	<textarea name="note" id="" cols="30" rows="3" ng-model="$root.notes" placeholder="{{ 'ORDER_DESCRIPTION' | translate }}" ng-disabled="readonly || !$root.orderInfo.length" keyboard></textarea>
+  </label>
+  <div ng-show="!readonly">
+    <button type="submit" class="button button-block button-balanced" ng-disabled="!$root.orderInfo.length" validation-submit="StepSecond" ng-click="stepSecond()" ng-show="!readonly">
+      {{ 'CHOOSE_SHOP' | translate }}
+    </button>
+  </div>
+  <script id="products.html" type="text/ng-template">
+      <form name="addProducts">
+      <ion-modal-view>
+          <ion-header-bar class="item-input-inset">
+            <div class="row">
+              <div class="col col-50">
+                <button class="button button-block" ng-click="close()">{{ 'CANCEL' | translate }}</button>
+              </div>
+              <div class="col col-50">
+                <button class="button button-block button-calm" validation-submit="addProducts" ng-click="save()">{{ 'SAVE_LIST' | translate }}</button>
+              </div>
+            </div>
+          </ion-header-bar>
+          <ion-content>
+          <div class="rtl">
+            <ul class="list goods_list">
+                <li class="item row">
+                    <div class="col">
+              	    	{{ 'PRODUCT' | translate }}
+              	    </div>
+                </li>
+                <li class="item row" ng-repeat="order in $root.orderInfoCurrent">
+                	<div class="col">
+            	    	<label class="item item-input">
+            				  <input type="text" ng-model="order.goods" name="goods-{{order.id}}" placeholder="{{ $index | example }}" keyboard>
+                      <i class="icon ion-alert-circled error"></i>
+            			  </label>
+            	    </div>
+                </li>
+            </ul>
+          </div>
+          </ion-content>
+      </ion-modal-view>
+    </form>
+  </script>
+</form>

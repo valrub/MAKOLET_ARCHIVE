@@ -1,0 +1,78 @@
+<ion-nav-view class="rtl">
+    <ion-view view-title="{{ 'SHOPS' | translate }}" id="shops" class="shop">
+        <div class="bar bar-header bar-calm">
+            <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+                <param name="src" value="img/logo_small.svg">
+            </object>
+            <button class="button button-clear icon-right ion-chevron-right ion-refresh" ng-click="listShops()"></button>
+            <h1 class="title">{{ 'SHOPS' | translate }}</h1>
+        </div>
+        <ion-content class="has-header" ng-class="$root.devicePlatform=='ios'?'has-header ios':'has-tabs-top android'" ng-init="listShops()">
+            <ion-list class="select_shop">
+                <ion-item class="no-padding">
+                    <div class="row no-padding">
+                        <div class="col col-70 address-text address-block">
+                            {{ $root.address }}
+                            <i class="icon placeholder-icon mk-icon-marker"></i>
+                        </div>
+                        <div class="col col-30 text-left">
+                            <button class="button button-small button-calm ng-binding activated" location-suggestion>{{ 'UPDATE_MAP' | translate }}</button>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="no-padding">
+                    <div class="map-container">
+                        <div class="row">
+                            <div class="col" ng-show="$root.map">
+                                <ui-gmap-google-map center='$root.map.center' zoom='$root.map.zoom' control="$root.map.control" options="$root.map.options">
+                                    <ui-gmap-markers models="$root.markers" coords="'self'" icon="'icon'" options="'options'"></ui-gmap-markers>
+                                </ui-gmap-google-map>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="no-padding" ng-show="!$root.shops.length">
+                    <div class="padding">{{ 'EMPTY' | translate }}</div>
+                </ion-item>
+                <ion-item class="no-padding shop_reviews" ng-repeat="shop in $root.shops" ng-show="$root.shops.length">
+                    <a ui-sref="customerShop({id: shop.id})" class="row row-center row-none-decoration item-body">
+                        <div class="col">
+                            {{ shop.city }} {{ shop.street }} {{ shop.building }} {{ shop.apartment }}, <b>{{ shop.company_name }}</b>
+                        </div>
+                        <div class="col text-center">
+                            <rating ng-model="shop.rating" max="5" readOnly="true"></rating>
+                        </div>
+                        <div class="col button button-small icon-left ion-ios-arrow-left button-clear button-calm">{{ shop.feedbacks.length }} {{ 'REVIEWS' | translate }}</div>
+                    </a>
+                </ion-item>
+                <ion-item class="padding order-now" ng-show="$root.shops.length">
+                  <button type="submit" class="button button-block button-calm" ng-click="orderFromShop()">
+                    {{ 'ORDER_NOW' | translate }}
+                  </button>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-view>
+</ion-nav-view>
+
+<script id="location.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="item-input-inset">
+            <label class="item-input-wrapper">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+                <input type="search" ng-model="search.query" placeholder="{{ 'CURRENT_ADDRESS' | translate }}" keyboard>
+            </label>
+            <div class="button button-clear" ng-click="close()"><span class="icon ion-close"></span></div>
+        </ion-header-bar>
+        <ion-content>
+            <ion-list>
+                <ion-item ng-show="search.error">
+                    {{search.error}}
+                </ion-item>
+                <ion-item ng-repeat="suggestion in search.suggestions" ng-click="choosePlace(suggestion)">
+                    {{suggestion.description}}
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-modal-view>
+</script>

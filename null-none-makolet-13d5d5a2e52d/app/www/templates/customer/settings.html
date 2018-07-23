@@ -1,0 +1,86 @@
+<ion-nav-view class="rtl">
+  <ion-view view-title="{{ 'PERSONAL_INFO' | translate }}">
+    <div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+        <param name="src" value="img/logo_small.svg">
+      </object>
+      <button class="button button-clear icon-right ion-chevron-right button-light ion-ios-help-outline" ui-sref="feedback"></button>
+      <h1 class="title">{{ 'PERSONAL_INFO' | translate }}</h1>
+    </div>
+    <ion-content class="has-header" ng-class="$root.devicePlatform=='ios'?'has-header ios':'android'">
+      <div class="settings" ng-init="customerCurrent()">
+        <form name="CustomerUpdateInfo">
+          <div class="list">
+            <div class="row">
+              <ion-col>
+                <label class="item item-input">
+                  <input type="text" validator="required" placeholder="{{ 'F_NAME' | translate }}" ng-model="user.first_name" name="firstName" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </ion-col>
+              <ion-col>
+                <label class="item item-input">
+                  <input type="text" validator="required" placeholder="{{ 'L_NAME' | translate }}" ng-model="user.last_name" name="lastName" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </ion-col>
+            </div>
+            <div class="row">
+              <label class="item item-input col">
+                <input type="tel" validator="required" placeholder="{{ 'PHONE_NUMBER' | translate }}" ng-model="user.phone" name="phone" ng-init="phone=''" valid-method="submit-only" keyboard>
+                <i class="icon ion-alert-circled error"></i>
+              </label>
+            </div>
+            <div class="row">
+              <label class="item item-input col">
+                <input type="text" validator="required" placeholder="{{ 'CITY' | translate }}" ng-model="user.city" name="city" ng-init="city=''" valid-method="submit-only" keyboard>
+                <i class="icon ion-alert-circled error"></i>
+              </label>
+            </div>
+            <div class="row">
+              <label class="item item-input col">
+                <input type="text" validator="required" placeholder="{{ 'STREET' | translate }}" ng-model="user.street" name="street" ng-init="street=''" valid-method="submit-only" keyboard>
+                <i class="icon ion-alert-circled error"></i>
+              </label>
+            </div>
+            <div class="row">
+              <ion-col>
+                <label class="item item-input">
+                  <input type="text" validator="required" placeholder="{{ 'BUILDING' | translate }}" ng-model="user.building" name="building" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </ion-col>
+              <ion-col>
+                <label class="item item-input">
+                  <input type="text" placeholder="{{ 'ENTRANCE' | translate }}" ng-model="entrance" name="user.entrance" keyboard>
+                </label>
+              </ion-col>
+              <ion-col>
+                <label class="item item-input">
+                  <input type="text" validator="required" placeholder="{{ 'APARTMENT' | translate }}" ng-model="user.apartment" name="apartment" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </ion-col>
+            </div>
+            <div>
+              <ion-col>
+                  <ion-toggle ng-model="pushEnable" toggle-class="toggle-calm" ng-change="pushStatus()" ><b>{{ 'PUSH_NOTIFICATIONS' | translate }}</b></ion-toggle>
+              </ion-col>
+            </div>
+            <div class="padding">
+              <button class="button button-block button-calm" validation-submit="CustomerUpdateInfo" ng-click="customerUpdateInfo()">
+                {{ 'UPDATE' | translate }}
+              </button>
+              <button ui-sref="customerFinance" class="button button-block button-balanced">
+                {{ 'PROFILE_CARD' | translate }}
+              </button>
+              <button ng-click="reset()" class="button button-block button-dark">
+                {{ 'LOGOUT' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

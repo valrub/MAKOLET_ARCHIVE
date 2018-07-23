@@ -1,0 +1,52 @@
+<ion-nav-view class="rtl">
+   <ion-view view-title="{{ 'ORDER' | translate }}" id="shop_order" ng-controller="shopOrderCtrl">
+      <div class="bar bar-header bar-calm">
+         <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+            <param name="src" value="img/logo_small.svg">
+         </object>
+         <button class="button button-clear icon-right ion-chevron-right button-light" ng-click="$ionicGoBack()">{{ 'BACK' | translate }}</button>
+         <button class="button button-clear icon-right ion-chevron-right ion-refresh" ng-click="orderRefresh()"></button>
+         <h1 class="title"> {{ 'ORDER' | translate }}</h1>
+      </div>
+      <ion-content class="has-header" ng-class="$root.devicePlatform=='ios'?'has-header has-footer ios':'has-tabs-top android'">
+         <form novalidate="novalidate">
+            <div class="list" ng-init="order()">
+               <div class="item order-info">
+                  <div class="row row-top no-padding">
+                     <div class="col calm no-padding">{{ 'NO.' | translate }} {{order.id}}</div>
+                     <div class="col calm text-right no-padding">
+                        {{ order.created_at | amDateFormat:'DD.MM' }}
+                     </div>
+                     <div class="col col-15 calm button-small no-padding">{{ order.created_at | timeAgo:'HH:mm'}}</div>
+                  </div>
+                  <div class="row no-padding item-body">
+                     <div class="order-text"><b>{{ order.customer.first_name }} {{ order.customer.last_name }}</b> {{ order.customer.phone }}</div>
+                  </div>
+                  <div class="row no-padding item-body">
+                     <div class="order-text">{{order.city}} {{order.street}} {{order.building}} {{order.apartment}}</div>
+                  </div>
+               </div>
+               <ul class="no-padding">
+                  <li class="item button-small padding-right" ng-repeat="item in order.goods">
+                     {{ item.quantity }} {{ item.name }}
+                  </li>
+               </ul>
+               <div class="padding notes-background" ng-show="order.customer_notes">
+                  <div class="item stable-bg">
+                     <i class="icon ion-alert notes-alert"></i> {{ order.customer_notes }}
+                  </div>
+               </div>
+               <div class="no-padding">
+                  <ui-gmap-google-map center='$root.map.center' zoom='$root.map.zoom' control="$root.map.control" options="$root.map.options">
+                     <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'">
+                     </ui-gmap-markers>
+                  </ui-gmap-google-map>
+               </div>
+            </div>
+            <div ng-if="order.status">
+               <div ng-include src="'templates/shop/status/'+order.status+'.html'"></div>
+            </div>
+         </form>
+      </ion-content>
+   </ion-view>
+</ion-nav-view>

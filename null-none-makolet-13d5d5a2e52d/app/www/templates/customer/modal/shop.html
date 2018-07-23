@@ -1,0 +1,38 @@
+<script id="shop.html" type="text/ng-template">
+  <ion-modal-view class="rtl">
+    <ion-header-bar class="bar bar-header bar-calm">
+      <h1 class="title">{{ shop.name }}</h1>
+      <div class="button button-clear" ng-click="closeModalShop()"><span class="icon ion-close"></span></div>
+    </ion-header-bar>
+    <ion-content class="shop">
+      <div class="row shop_info">
+        <div class="col">
+          <div class="padding">
+            <h4 class="heading">{{ shop.city }} {{ shop.street }} {{ shop.building }}</h4>
+            <div class="shop_reviews">
+              <rating ng-model="shop.rating" max="5"></rating>
+            </div>
+            <p>{{ shop.phone }}</p>
+            <p>{{ shop.mobile }}</p>
+          </div>
+        </div>
+        <div class="col col-50">
+          <div class="padding small-map">
+            <ui-gmap-google-map center='$root.mapShop.center' zoom='$root.mapShop.zoom' control="$root.mapShop.control" options="$root.mapShop.options">
+              <ui-gmap-markers models="markersShop" coords="'self'" icon="'icon'" options="'options'"></ui-gmap-markers>
+            </ui-gmap-google-map>
+          </div>
+        </div>
+      </div>
+      <div class="list shop_reviews">
+        <div class="item item-body" ng-repeat="feedback in shop.feedbacks">
+          <h5 class="heading" ng-bind="feedback.created_at | amDateFormat:'DD.MM.YYYY'"></h5>
+          <rating ng-model="feedback.score" max="5"></rating>
+          <p>
+            {{feedback.comment}}
+          </p>
+        </div>
+      </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

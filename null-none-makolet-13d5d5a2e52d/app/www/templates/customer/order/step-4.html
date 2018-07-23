@@ -1,0 +1,26 @@
+<div class="order_status" id="step4">
+	<div ng-show="order.status != ''" ng-repeat="item in order.proposals | filter:{ id: order.proposal_id }">
+		<div ng-include src="'templates/customer/status/'+item.status+'.html'"></div>
+	</div>
+</div>
+<div class="order_sharing" ng-show="order.proposal_id">
+	<div class="row row-center">
+		<div class="col">
+			<div class="score-shop">{{ 'SCORE_THE_SHOP' | translate }}:</div>
+			<rating ng-model="feedback.rating" max="5"></rating>
+		</div>
+	</div>
+	<form>
+	<div class="row">
+		<label class="item item-input-wrapper">
+			<i class="icon mk-icon-pencil placeholder-icon"></i>
+			<textarea name="comment" ng-model="feedback.comment" cols="30" rows="3" placeholder="{{ 'QUESTIONS_FOR_FEEDBACK' | translate }}"></textarea>
+		</label>
+	</div>
+	<div class="row">
+		<button type="submit" class="button button-block button-positive" ng-disabled="order.feedback" ng-click="sendRating(order.id)">
+        	{{ 'SEND_RATING' | translate }}
+        </button>
+    </div>
+    </form>
+</div>

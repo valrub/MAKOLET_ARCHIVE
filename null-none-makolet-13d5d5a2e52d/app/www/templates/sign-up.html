@@ -1,0 +1,106 @@
+<ion-nav-view class="rtl">
+  <ion-view view-title="{{ 'SIGN_UP' | translate }}" id="signup">
+    <div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+        <param name="src" value="img/logo_small.svg">
+      </object>
+      <a ui-sref="login" class="button button-clear icon-right ion-chevron-right button-light">{{ 'BACK' | translate }}</a>
+      <h1 class="title">{{ 'PERSONAL_INFO' | translate }}</h1>
+    </div>
+    <ion-content ng-class="$root.devicePlatform=='ios'?'has-header ios':'has-tabs-top android'" ng-controller="accountCtrl" ng-init="$root.tabs=false">
+      <div class="sign-up-block">
+        <form name="SignUp">
+          <div class="list">
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="0" placeholder="{{ 'F_NAME' | translate }}" ng-model="firstName" name="firstName" ng-init="firstName=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input">
+                  <input type="text" validator="required" tabindex="1" placeholder="{{ 'L_NAME' | translate }}" ng-model="lastName" name="lastName" ng-init="lastName=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input col">
+                  <input type="tel" validator="required" tabindex="2" placeholder="{{ 'PHONE_NUMBER' | translate }}" ng-model="phone" name="phone" ng-init="phone=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input col">
+                  <input type="email" validator="email" tabindex="3" placeholder="{{ 'EMAIL' | translate }}" ng-model="email" name="email" ng-init="email=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input">
+                  <i on-tap="passwordActions($event)" class="icon ion-eye" ng-style="{'font-size': '30px', 'color': '#0071bc'}"></i>
+                  <input type="password" validator="required" tabindex="4" placeholder="{{ 'PASSWORD' | translate }}" ng-model="password" name="password" ng-init="password=''" valid-method="submit-only">
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input col validated">
+                  <input type="text" validator="required" tabindex="5" placeholder="{{ 'CITY' | translate }}" ng-model="city" name="city" ng-init="city=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input col validated">
+                  <input type="text" validator="required" tabindex="6" placeholder="{{ 'STREET' | translate }}" ng-model="street" name="street" ng-init="street=''" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label class="item item-input validated">
+                  <input type="text" validator="required" tabindex="7" placeholder="{{ 'BUILDING' | translate }}" ng-model="building" name="building" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input validated">
+                  <input type="text" ng-model="entrance" validator="required" tabindex="8" placeholder="{{ 'ENTRANCE' | translate }}" name="entrance" valid-method="submit-only" keyboard>
+                  <i class="icon ion-alert-circled error"></i>
+                </label>
+              </div>
+              <div class="col">
+                <label class="item item-input validated">
+                  <input type="text" ng-model="apartment" tabindex="9" placeholder="{{ 'APARTMENT' | translate }}" name="apartment" keyboard>
+                </label>
+              </div>
+            </div>
+            <div class="item item-checkbox">
+              <div class="checkbox">
+                <input type="checkbox" ng-model="termOfUse" ng-init="termOfUse=true">
+              </div>
+              <div href="#terms-of-use" stop-event ng-click="openTermsOfUse()" class="terms-of-use">{{ 'TERMS_OF_USE' | translate }}</div>
+            </div>
+            <div class="padding">
+              <button class="button button-block button-balanced icon-left" validation-submit="SignUp" ng-click="signUp()" ng-disabled="!termOfUse">
+                {{ 'SIGN_UP' | translate }}
+                <i class="ion-icon ion-ios-arrow-back"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div ng-include="" src="'templates/terms-of-use.html'"></div>
+    </ion-content>
+  </ion-view>
+</ion-nav-view>

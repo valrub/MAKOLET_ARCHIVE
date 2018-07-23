@@ -1,0 +1,57 @@
+<ion-nav-view id="make-order" class="rtl">
+   <ion-view view-title="Summary" id="shop_summary">
+      <div class="bar bar-header bar-calm">
+         <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+            <param name="src" value="img/logo_small.svg">
+         </object>
+         <button class="button button-clear icon-right ion-chevron-right ion-refresh" ng-click="shopOrders()"></button>
+         <h1 class="title">{{$root.name}}</h1>
+      </div>
+      <ion-content class="has-header padding" ng-class="$root.devicePlatform=='ios'?'has-header ios':'has-tabs-top android'" ng-init="shopOrders(); currentStatus=''">
+        <ion-refresher pulling-text="{{ 'UPDATE' | translate }}" on-refresh="shopOrders()">
+        </ion-refresher>
+         <div class="padding">
+            <div class="button-bar bar-positive bar-outline">
+               <a class="button" ng-click="currentStatus = ''">{{ 'ALL' | translate }}</a>
+               <a class="button" ng-click="currentStatus = 1">{{ 'PENDING_A_PROPOSAL' | translate }}</a>
+               <a class="button" ng-click="currentStatus = 2">{{ 'PENDING_TO_APPROVE' | translate }}</a>
+               <a class="button" ng-click="currentStatus = 3">{{ 'ORDERS_IN_PROCESS' | translate }}</a>
+            </div>
+         </div>
+         <ion-list ng-show="(orders.data | filter:{'status': currentStatus}).length == 0">
+            <ion-item striped class="no-padding">
+               <div class="padding">{{ 'EMPTY' | translate }}</div>
+            </ion-item>
+         </ion-list>
+         <ion-list>
+            <ion-item class="no-padding shop_reviews" ng-repeat="order in orders.data | filter:{'status': currentStatus }" striped class="item-shop-summary">
+               <a ui-sref="shopOrder({id: order.id})" class="row row-center row-none-decoration item-body">
+                  <div class="col col-10 nowrap">
+                     {{ order.id }}
+                  </div>
+                  <div class="col col-20 nowrap">
+                     {{ order.created_at | amDateFormat:'HH:MM' }}
+                  </div>
+                  <div class="col col-33">
+                     <b>{{ order.first_name }} {{ order.last_name }}</b> {{ order.phone }} {{ order.street }} {{ order.building }} {{ order.apartment }}
+                  </div>
+                  <div class="col col-20">
+                     {{ order.status | status }}
+                  </div>
+                  <div class="col col-10 button button-small icon-left ion-ios-arrow-left button-clear button-calm"></div>
+               </a>
+            </ion-item>
+         </ion-list>
+         <div class="row padding-bottom paginate">
+            <div class="col-50 text-right">
+               <i class="icon ion-ios-arrow-right" ng-show="orders.prev_page_url"></i>
+               <a href="#" class="row-none-decoration" ng-click="shopOrdersPaginate(orders.current_page - 1)" ng-show="orders.prev_page_url"> {{ 'PREVIOUS_ORDERS' | translate }}</a>
+            </div>
+            <div class="col-50 text-left paginate">
+               <a href="#" class="row-none-decoration" ng-show="orders.next_page_url" ng-click="shopOrdersPaginate(orders.current_page + 1)">{{ 'NEXT_ORDERS' | translate }}</a>
+               <i class="icon ion-ios-arrow-left" ng-show="orders.next_page_url"></i>
+            </div>
+         </div>
+      </ion-content>
+   </ion-view>
+</ion-nav-view>

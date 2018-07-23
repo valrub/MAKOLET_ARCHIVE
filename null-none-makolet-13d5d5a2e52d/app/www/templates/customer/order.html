@@ -1,0 +1,58 @@
+<ion-nav-view id="make-order" class="rtl">
+  <ion-view view-title="{{ 'ORDER' | translate }}" cache-view="false">
+  	<div class="bar bar-header bar-calm">
+      <object id="E" type="image/svg+xml" class="header-logo" data="img/logo_small.svg">
+          <param name="src" value="img/logo_small.svg">
+      </object>
+      <button class="button button-clear icon-right ion-chevron-right button-light" ng-click="$ionicGoBack()" ng-if="statusUpdate">{{ 'BACK' | translate }}</button>
+      <button class="button button-clear icon-right ion-chevron-right ion-refresh" ng-click="refreshOrder(order.id)" ng-if="!statusUpdate"></button>
+      <h1 class="title">{{ 'ORDER' | translate }} </h1>
+    </div>
+    <ion-content class="has-header" ng-class="$root.devicePlatform=='ios'?'has-header has-footer ios':'has-tabs-top android'">
+      <ion-refresher pulling-text="{{ 'UPDATE' | translate }}" on-refresh="refreshOrder(order.id)">
+      </ion-refresher>
+    	<div class="row order-info">
+        <div class="col no-padding" ng-show="numberOrder && order.status < 5">
+          <a class="button button-icon icon delete-order ion-close-circled" ng-click="removeOrder(order.id)"></a>
+        </div>
+    		<div class="col" ng-show="numberOrder">{{ 'NO.' | translate }} {{ numberOrder }} </div>
+    		<div class="col">{{date | amDateFormat:'DD.MM.YYYY'  }}</div>
+    	</div>
+      <ion-list class="accordion">
+        <div ng-repeat="step in steps" class="item-collapse" ng-class="step.active?'active':''" ng-click="openTab(step.id)">
+          <ion-item class="item-stable">
+              <i class="icon" ng-class="step.active ? 'ion-ios-arrow-up':'ion-ios-arrow-down'"></i>
+            &nbsp;
+            {{step.name}}
+          </ion-item>
+          <div ng-show="step.active" class="ng-hide">
+            <ion-item class="item-accordion">
+              <div ng-include src="'templates/customer/order/step-'+step.id+'.html'"></div>
+            </ion-item>
+          </div>
+        </div>
+      </ion-list>
+    </ion-content>
+    <div class="bar bar-subfooter">
+      <ul class="progress-indicator custom-complex">
+            <li ng-class="order.status >= 1 ? 'completed':''">
+              {{ 'ORDER_SENT' | translate }}
+              <span class="bubble"></span>
+            </li>
+            <li ng-class="order.status >= 2 ? 'completed':''">
+              {{ 'RECEIVED_PROPOSAL' | translate }}
+              <span class="bubble"></span>
+            </li>
+            <li ng-class="order.status >= 3 ? 'completed':''">
+              {{ 'RECEIVED_APPROVED' | translate }}
+              <span class="bubble"></span>
+            </li>
+            <li ng-class="order.status >= 5 ? 'completed':''">
+              {{ 'ORDER_SENT_TO_CUSTOMER' | translate }}
+              <span class="bubble"></span>
+            </li>
+        </ul>
+        <small class="positive text-center new_order_date" ng-show="numberOrder">{{ 'NO.' | translate }} {{ numberOrder }}</small>
+    </div>
+  </ion-view>
+</ion-nav-view>

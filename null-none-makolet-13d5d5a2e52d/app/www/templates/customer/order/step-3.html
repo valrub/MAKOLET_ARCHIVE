@@ -1,0 +1,58 @@
+<div>
+   <ion-list class="select_proposal" id="step3">
+      <ion-item class="no-padding" ng-show="order.status == 1">
+         <div class="row row-center">
+            <p>{{ 'WAITING' | translate }}</p>
+         </div>
+      </ion-item>
+      <ion-item class="no-padding" ng-repeat="item in order.proposals" ng-show="order.status >= 2 && order.status < 5">
+         <div class="row row-center" ng-show="item.status == 2">
+            <div class="col col-50 text-right">
+               <strong>{{ 'RECEIVED_PROPOSAL' | translate }}</strong>{{ item.shop.name }}  {{ item.delivery_time | amDateFormat:'HH:mm' }}
+               <div>{{ item.shop_notes }}</div>
+            </div>
+            <div class="col col-50">
+               <div class="row">
+                  <div class="col">
+                     <a class="button button-small button-balanced" ng-click="proposalAction(item, 1)">{{ 'DELETED_FROM_THE_LIST' | translate }}</a>
+                  </div>
+                  <div class="col">
+                     <a class="button button-small button-assertive" ng-click="proposalAction(item, 0)">{{ 'APPROVED_FROM_THE_LIST' | translate }}</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row row-center" ng-show="item.status == 3">
+            <div class="col col-50">
+               <strong>{{ 'RECEIVED_PROPOSAL' | translate }}</strong> {{ item.proposed_at | amDateFormat:'DD.MM.YYYY HH:mm' }}
+            </div>
+            <div class="col col-50">
+               <strong>{{ 'DECLINE' | translate }}</strong>
+            </div>
+         </div>
+         <div class="row row-center" ng-show="item.status == 4">
+            <div class="col col-50">
+               <strong>{{ 'RECEIVED_PROPOSAL' | translate }}</strong> {{ item.declined_at | amDateFormat:'DD.MM.YYYY HH:mm' }}
+            </div>
+            <div class="col col-50">
+               <strong>{{ 'DECLINE' | translate }}</strong>
+            </div>
+         </div>
+      </ion-item>
+      <ion-item class="no-padding" ng-show="order.status == 5">
+         <div class="row row-center" ng-repeat="item in order.proposals">
+            <div class="col col-50">
+               {{ item.shop.name }}
+            </div>
+            <div class="col col-50">
+               {{ item.status | status }}
+            </div>
+         </div>
+      </ion-item>
+      <div class="no-padding">
+         <button class="button button-block button-balanced ion-refresh" ng-click="refreshOrder(order.id)">
+            {{ 'PROPOSALS' | translate }}
+         </button>
+      </div>
+   </ion-list>
+</div>

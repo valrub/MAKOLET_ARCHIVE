@@ -1,0 +1,89 @@
+<div>
+  <div class="row no-padding" id="step-2">
+    <div class="col col-70 address-text address-block" ng-hide="order.id">
+      {{ $root.address }}
+      <i class="icon placeholder-icon mk-icon-marker"></i>
+    </div>
+    <div class="col col-70 address-text address-block" ng-show="order.id">
+       {{ order.city }} {{ order.street }} {{ order.building }} {{ order.apartment }}
+       <i class="icon placeholder-icon mk-icon-marker"></i>
+    </div>
+    <div class="col col-30 text-left">
+      <button class="button button-small button-calm ng-binding activated" location-suggestion ng-hide="order.id">{{ 'UPDATE_MAP' | translate }}</button>
+    </div>
+  </div>
+  <div class="map-container">
+     <div class="row">
+        <div class="col">
+           <ui-gmap-google-map center='$root.map.center' zoom='$root.map.zoom' control="$root.map.control"
+           options="$root.map.options">
+              <ui-gmap-markers models="$root.markers" coords="'self'" icon="'icon'" options="'options'"></ui-gmap-markers>
+           </ui-gmap-google-map>
+        </div>
+     </div>
+  </div>
+  <ion-list class="select_shop" ng-show="!readonly">
+     <ion-item class="no-padding select-shops-orders" ng-repeat="shop in $root.shops">
+        <div class="row row-center">
+           <div class="col col-10 col-15">
+              <label class="checkbox no-padding">
+              	<input type="checkbox" ng-model="shop.checkbox">
+              </label>
+           </div>
+           <div class="col col-33" ng-click="openShop(shop.id)">
+              <b>{{ shop.name }}</b> {{ shop.city }} {{ shop.street }} {{ shop.building }} {{ order.apartment }}
+           </div>
+           <div class="col text-center col-15" ng-click="openShop(shop.id)">
+               <rating ng-model="shop.rating" max="5" readonly="true"></rating>
+           </div ng-click="openShop(shop.id)">
+           <div class="col button-small icon-left col-25">{{ shop.feedbacks.length }} {{ 'REVIEWS' | translate }}</div>
+        </div>
+     </ion-item>
+  </ion-list>
+  <ion-list class="select_shop" ng-show="readonly">
+     <ion-item class="no-padding select-shops-orders" ng-repeat="item in order.proposals">
+        <div class="row row-center">
+           <div class="col col-10">
+              {{ item.shop_id }}
+           </div>
+           <div class="col">
+              {{ item.shop.name }}
+           </div>
+           <div class="col button-small icon-left">{{ item.status | status }}</div>
+        </div>
+     </ion-item>
+  </ion-list>
+  <div ng-show="$root.userInfo.solvent && $root.deviceToken">
+    <button type="submit" class="button button-block button-balanced" ng-click="stepThird();" ng-show="!readonly">
+    	{{ 'SEND_SHOPING_LIST' | translate }}
+    </button>
+  </div>
+  <div ng-show="!$root.userInfo.solvent" class="text-center padding-top">
+    <button class="button icon-left ion-card" ui-sref="customerFinance">{{ 'NO_SOLVENT'| translate }}</button>
+  </div>
+  <div ng-show="!$root.deviceToken" class="text-center padding-top">
+    <button class="button icon-left ion-android-notifications-none" ui-sref="customerSettings">{{ 'DISABLE_NOTIFICATION'| translate }}</button>
+  </div>
+  <script id="location.html" type="text/ng-template">
+      <ion-modal-view>
+          <ion-header-bar class="item-input-inset">
+              <label class="item-input-wrapper">
+                  <i class="icon ion-ios7-search placeholder-icon"></i>
+                  <input type="search" ng-model="search.query" placeholder="{{ 'CURRENT_ADDRESS' | translate }}" keyboard>
+              </label>
+              <div class="button button-clear" ng-click="close()"><span class="icon ion-close"></span></div>
+          </ion-header-bar>
+          <ion-content>
+              <ion-list>
+                  <ion-item ng-show="search.error">
+                      {{search.error}}
+                  </ion-item>
+                  <ion-item ng-repeat="suggestion in search.suggestions" ng-click="choosePlace(suggestion)">
+                      {{suggestion.description}}
+                  </ion-item>
+              </ion-list>
+          </ion-content>
+      </ion-modal-view>
+  </script>
+          <div ng-include="" src="'templates/customer/modal/shop.html'"></div>
+</div>
