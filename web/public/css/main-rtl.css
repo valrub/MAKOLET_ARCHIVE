@@ -1,0 +1,78 @@
+.right {
+	text-align: left;
+}
+
+.left {
+	text-align: right;
+}
+
+.navbar-right {
+	float: left !important;
+}
+
+/* New order */
+
+.section#new-order h3 .order-number {
+	margin: 0 0 0 40px;
+}
+
+.section#new-order .nav-tabs a {
+	margin: 0 0 0 10px;
+}
+
+.section#new-order #goods table td:first-child {
+    border-left: none; /* 1px solid #c2c2c2; */
+    border-right: none;
+}
+
+.section#new-order #shops label,
+.section#map label {
+	padding: 0 0 0 20px;
+}
+
+.section#new-order #shops .shops-list input[type=checkbox] + label,
+.section#new-order #shops .shops-list label {
+	margin: 0 0 0 30px;
+	float: right;
+}
+
+/* Shop */
+
+.section#shop-details .feedback-entry .feedback-rating .feedback-label {
+	margin: 0 0 0 30px;
+}
+
+/* Profile */
+
+.section#profile-form fieldset .col {
+	padding-right: 0;
+    padding-left: 25px;
+}
+
+.section#profile-form fieldset label {
+	padding-left: 10px;
+	padding-right: 0;
+}
+
+.section#profile-form fieldset .half-width:first-of-type {
+	margin-left: 3%;
+	margin-right: 0;
+}
+
+/* Register */
+
+.section#profile-form.register .agree-terms input[type=checkbox] + label,
+.section#profile-form.register .agree-termst label {
+	background-position: center right;
+}
+
+/* Login */
+
+.section#login .col-customer {
+	border-right: 0;
+	border-left: 1px solid #29abe2;
+}
+
+.section#login .col-customer .btn-link {
+	float: left;
+}

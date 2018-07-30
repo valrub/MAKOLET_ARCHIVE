@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        width: 1000px;
+        height: 800px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+
+      function initialize() {
+
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+          center: new google.maps.LatLng(42.695189, 23.319827),
+          zoom: 16,
+          maxZoom: 18,
+          minZoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: "Makolet"
+        });
+
+        var store = new google.maps.Marker({
+          map: map,
+          // draggable: true,
+          position: new google.maps.LatLng(42.695189, 23.319827),
+          icon: 'img/cart-icon-red.png', // null = default icon
+          title: "Makolet"
+        });
+
+        store.addListener('click', function() {
+          map.setCenter(store.getPosition());
+          infowindow.open(map, store);
+        });
+
+        // Customer location
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+        function showPosition(position) {
+          var customer = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            icon: 'img/location-icon-blue.png', // null = default icon
+            title: "You are here",
+            animation: google.maps.Animation.DROP
+          });
+          map.setCenter(customer.getPosition());
+        }
+
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
